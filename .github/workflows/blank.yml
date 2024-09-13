@@ -44,4 +44,4 @@ jobs:
       # "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" "${{ github.workspace }}\PD303\SE_Project\PD303.synthedit" "/autosavevst /quiet"
       - name: Run a multi-line script
         run: |
-          "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" /autosavevst /quiet
+          "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" "/autosavevst" "/quiet"
