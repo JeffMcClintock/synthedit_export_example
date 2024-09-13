@@ -41,7 +41,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       # todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
+      # "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" "${{ github.workspace }}\PD303\SE_Project\PD303.synthedit" /autosavevst /quiet
       - name: Run a multi-line script
         run: |
-          "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" "${{ github.workspace }}\PD303\SE_Project\PD303.synthedit" /autosavejuce /quiet
-          dir ${{ github.workspace }}
+          "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" /autosavevst /quiet
