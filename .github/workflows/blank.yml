@@ -42,6 +42,8 @@ jobs:
       # Runs a set of commands using the runners shell
       # todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
       # "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" "${{ github.workspace }}\PD303\SE_Project\PD303.synthedit" "/autosavevst /quiet"
+      # have to quote arguments with slashes for powershell. e.g. "/quiet"
+      # have to quote quotes like: "`"
       - name: Run a multi-line script
         run: |
-          "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" "/autosavevst" "/quiet"
+          "`"$env:SYNTHEDIT_EXE`"" "/autosavevst" "/quiet"
