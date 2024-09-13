@@ -43,7 +43,7 @@ jobs:
       # todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
       - name: Run a multi-line script
         run: |
-          ECHO "${{SYNTHEDIT_EXE}}" ".\${{PROJECT_NAME}}\SE_Project\${{PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
-          "${{SYNTHEDIT_EXE}}" "${{github.workspace}}\build\${{PROJECT_NAME}}\SE_Project\${{PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
+          ECHO "$SYNTHEDIT_EXE" ".\$PROJECT_NAME\SE_Project\$PROJECT_NAME.synthedit" /autosavejuce /quiet"
+          "$SYNTHEDIT_EXE" "${{github.workspace}}\build\$PROJECT_NAME\SE_Project\$PROJECT_NAME.synthedit" /autosavejuce /quiet"
 
           echo test, and deploy your project.
