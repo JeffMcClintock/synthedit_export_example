@@ -40,10 +40,10 @@ jobs:
         run: ./Install_SynthEdit_64bit.exe /quiet
 
       # Runs a set of commands using the runners shell
+      # todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
       - name: Run a multi-line script
         run: |
-          ECHO "{{$SYNTHEDIT_EXE}}" ".\{{$PROJECT_NAME}}\SE_Project\{{$PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
-          "{{$SYNTHEDIT_EXE}}" ".\{{$PROJECT_NAME}}\SE_Project\{{$PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
-          REM todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
+          ECHO "${{SYNTHEDIT_EXE}}" ".\${{PROJECT_NAME}}\SE_Project\${{PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
+          "${{SYNTHEDIT_EXE}}" "${{github.workspace}}\build\${{PROJECT_NAME}}\SE_Project\${{PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
 
           echo test, and deploy your project.
