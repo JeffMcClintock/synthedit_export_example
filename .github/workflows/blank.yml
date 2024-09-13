@@ -41,6 +41,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          "$(syntheditExe)" ".\$PROJECT_NAME\SE_Project\$PROJECT_NAME.synthedit" /autosavejuce /quiet" # todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
+          "$(syntheditExe)" ".\{{$PROJECT_NAME/}}\SE_Project\{{$PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
+          REM todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
 
           echo test, and deploy your project.
