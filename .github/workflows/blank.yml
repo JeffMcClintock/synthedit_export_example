@@ -30,6 +30,7 @@ jobs:
       - uses: valadaptive/download-file-action@v0.1.0
 
       - name: Download and Cache File
+        uses: valadaptive/download-file-action@v0.1.0
         with:
           # The URL to fetch
           url: http://synthedit.com/beta/Install_SynthEdit_64bit.exe
