@@ -43,6 +43,5 @@ jobs:
       # todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
       - name: Run a multi-line script
         run: |
-          "$env:SYNTHEDIT_EXE" "${{ github.workspace }}\%PROJECT_NAME%\SE_Project\%PROJECT_NAME%.synthedit" /autosavejuce /quiet
-
+          "C:\Program Files\SynthEdit 1.5\SynthEdit.exe" "${{ github.workspace }}\PD303\SE_Project\PD303.synthedit" /autosavejuce /quiet
           dir ${{ github.workspace }}
