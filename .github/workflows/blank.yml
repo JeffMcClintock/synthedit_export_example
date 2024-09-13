@@ -4,6 +4,7 @@ name: SynthEdit Plugin CI
 
 env:
   PROJECT_NAME: 'PD303'
+  SYNTHEDIT_EXE: 'C:\Program Files\SynthEdit 1.5\SynthEdit.exe'
 
 # Controls when the workflow will run
 on:
@@ -41,7 +42,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          "$(syntheditExe)" ".\{{$PROJECT_NAME/}}\SE_Project\{{$PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
+          ECHO "{{$SYNTHEDIT_EXE}}" ".\{{$PROJECT_NAME}}\SE_Project\{{$PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
+          "{{$SYNTHEDIT_EXE}}" ".\{{$PROJECT_NAME}}\SE_Project\{{$PROJECT_NAME}}.synthedit" /autosavejuce /quiet"
           REM todo /rego $(SynthEditRegoKey) /regoname "$(SynthEditRegoName)"
 
           echo test, and deploy your project.
