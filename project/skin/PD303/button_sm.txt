@@ -1,0 +1,3 @@
+type animated
+frame_size 32, 32
+mouse_response click

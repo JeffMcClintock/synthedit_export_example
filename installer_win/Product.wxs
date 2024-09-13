@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<?define ProductName = "SpecDyn" ?>
+	<?define CompanyName = "SSG Audio" ?>
+	<?define VERSION =!(bind.FileVersion.fil_vst2_plugin) ?>
+	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version='$(var.VERSION)' Manufacturer="$(var.CompanyName)" UpgradeCode="d2eefbd9-5df4-4c64-b52b-f257f9faf49f">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"/>
+		<WixVariable Id="WixUILicenseRtf" Value="EULA.rtf" />
+		<!-- https://wixtoolset.org/docs/v3/wixui/wixui_customizations/ -->
+		<WixVariable Id="WixUIBannerBmp" Value="InstallerBanner.bmp" />
+		<WixVariable Id="WixUIDialogBmp" Value="InstallerBackground.bmp" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+		<!-- <UIRef Id="WixUI_FeatureTree" /> -->
+		<!-- icon that shows on Add/Remove Programs -->
+		<Icon Id="icon.ico" SourceFile="icon.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="icon.ico" />
+		
+		<Feature Id="VST2_Plugin" Title="VST2 Plugin"> <!-- TypicalDefault='advertise' Level="2" -->
+			<ComponentRef Id='vst2_plugin' />
+		</Feature>
+		<Feature Id="VST3_Plugin" Title="VST3 Plugin"> <!-- Level="1" -->
+			<ComponentGroupRef Id='VST3Plugin' />
+			<ComponentRef Id='dir_vst3_placeholder' />
+		</Feature>
+		<Feature Id="AAX_Plugin" Title="AAX Plugin"> <!-- Level="2" -->
+			<ComponentRef Id='dir_aax_placeholder' />
+			<ComponentGroupRef Id='AAXPlugin' />
+		</Feature>
+		<!--
+		<Feature TypicalDefault='advertise' Id="StandaloneApp" Title="Standalone App" Level="2">
+			<ComponentRef Id='StandaloneApp' />
+		</Feature>
+		-->
+		<Feature Id="ProductFeature" Title="$(var.ProductName) Manual"> <!-- TypicalDefault='install' Level="1" -->
+			<ComponentRef Id='optimus_manual' />
+		</Feature>
+
+		<Directory Id='TARGETDIR' Name='SourceDir'>			
+			<Directory Id="CommonFiles64Folder" >
+				
+				<!-- VST3 -->
+				<Directory Id="dir_VST3" Name="VST3" >
+					<Directory Id="dir_vst3plugin" Name="$(var.ProductName).vst3" >
+						<Component Id="dir_vst3_placeholder" Guid="{24E6F0CB-3909-40ED-84D2-01798F23C89C}"
+						  SharedDllRefCount="no" KeyPath="yes" NeverOverwrite="no" Permanent="no" Transitive="no"
+						  Location="either">
+							<CreateFolder/>
+						</Component>
+					</Directory>
+				</Directory>
+
+				<!-- AAX -->
+				<Directory Id="dir_Avid" Name="Avid">
+					<Directory Id="dir_Avid_Audio" Name="Audio">
+						<Directory Id="dir_Avid_Audio_Plugins" Name="Plug-Ins">
+							<Component Id="dir_aax_placeholder" Guid="{1A0DC956-6D8F-45FD-B543-E474C695EF85}"
+  SharedDllRefCount="no" KeyPath="no" NeverOverwrite="no" Permanent="no" Transitive="no"
+  Location="either">
+								<CreateFolder/>
+							</Component>
+						</Directory>
+					</Directory>
+				</Directory>
+			</Directory>
+			
+			<Directory Id="ProgramMenuFolder" Name="Programs"/>
+
+			<Directory Id="ProgramFiles64Folder">
+				
+				<!-- Standalone App 
+				<Directory Id="dir_SSG" Name="SSG Audio">
+					<Component Id="StandaloneApp" Guid="{6C212CD7-FE1E-43AB-BAAB-63CCC1AE406A}">
+						<File KeyPath="yes" Id="StandaloneExecutableFile" Source="$(var.ARTIFACT_DIR)/$(var.ProductName).exe" />
+						<Shortcut Id="StartMenuStandalone" Directory="ProgramMenuFolder" Name="$(var.ProductName)"
+							   WorkingDirectory="dir_SSG" Advertise="yes" />
+					</Component>
+				</Directory>
+				-->
+				
+				<!-- VST2 -->
+				<Directory Id="dir_VST2" Name="VSTPlugins">
+					<Component Id="vst2_plugin" Guid="{EEE03D03-4E56-4CB7-991E-F4E975EB0A4E}">
+						<File Id="fil_vst2_plugin" Source="$(var.ARTIFACT_DIR)/$(var.ProductName).dll" />
+					</Component>
+				</Directory>
+			</Directory>
+
+			<!-- Manual -->
+			<Directory Id="CommonAppDataFolder">
+				<Directory Id="CommonAppDataManufacturerFolder" Name="$(var.CompanyName)">
+					<Component Id="optimus_manual" Guid="{341EF16A-E831-4EA5-B583-B18C31EC8610}">
+						<File Id="fil4436035E377F4C9F8ED65771974E4EED" Source="..\OptimusUserGuide.pdf" />
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+	</Product>
+</Wix>

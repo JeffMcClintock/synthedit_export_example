@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>6e55297c-19d9-41eb-a1f1-3b1a1e6e7e65</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>SpecDyn_Installer</OutputName>
+    <OutputType>Package</OutputType>
+    <SuppressValidation>true</SuppressValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;VST3SourceDir=$(SolutionDir)..\..\..\a\win_plugins\PD303.vst3;ARTIFACT_DIR=$(SolutionDir)..\..\..\a\win_plugins</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>VST3SourceDir=$(SolutionDir)..\..\a\win_plugins\Optimus.vst3;AAXSourceDir=$(SolutionDir)..\..\a\win_plugins\Optimus.aaxplugin;ARTIFACT_DIR=$(SolutionDir)..\..\a\win_plugins</DefineConstants>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+    <WixVariables>
+    </WixVariables>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AAXPluginFragment.wxs" />
+    <Compile Include="Product.wxs" />
+    <Compile Include="VST3PluginFragment.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 build tools must be installed to build this project. To download the WiX Toolset, see https://wixtoolset.org/releases/v3.11/stable" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(SolutionDir)..\..\a\win_plugins\Optimus.vst3" -cg VST3Plugin -gg -scom -sreg -sfrag -srd -dr dir_vst3plugin -var var.VST3SourceDir -out "$(ProjectDir)VST3PluginFragment.wxs"
+"$(WIX)bin\heat.exe" dir "$(SolutionDir)..\..\a\win_plugins\Optimus.aaxplugin" -cg AAXPlugin -gg -scom -sreg -sfrag -srd -dr dir_Avid_Audio_Plugins -var var.AAXSourceDir -out "$(ProjectDir)AAXPluginFragment.wxs"</PreBuildEvent>
+  </PropertyGroup>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

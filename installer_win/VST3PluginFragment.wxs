@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="dir_vst3plugin">
+            <Directory Id="dir29BA59CE966F0815784210F6CAADB29B" Name="Contents">
+                <Directory Id="dir63679F7CF3D66924FEC3B29C64308A5B" Name="x86_64-win">
+                    <Component Id="cmp1912F4114E3CE5CCEA6B9DF4ADFAD67B" Guid="{ECEF4320-CC3B-4B1D-BF64-7FBED0D2960B}">
+                        <File Id="fil42E31E1B485A32DB72D550C898E972E8" KeyPath="yes" Source="$(var.VST3SourceDir)\Contents\x86_64-win\Optimus.vst3" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="VST3Plugin">
+            <ComponentRef Id="cmp1912F4114E3CE5CCEA6B9DF4ADFAD67B" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>
