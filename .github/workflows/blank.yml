@@ -45,5 +45,6 @@ jobs:
       # have to quote arguments with slashes for powershell. e.g. "/quiet"
       # have to quote quotes like: "`"
       - name: Run a multi-line script
+        shell: cmd
         run: |
-          "`"$env:SYNTHEDIT_EXE`"" "/autosavevst" "/quiet"
+          "$env:SYNTHEDIT_EXE" /autosavevst /quiet
