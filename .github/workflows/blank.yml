@@ -47,6 +47,6 @@ jobs:
       - name: Run a multi-line script
         shell: cmd
         run: |
-          dir C:\Program Files
+          dir "C:\Program Files"
           "$SYNTHEDIT_EXE" /autosavevst /quiet
           echo $SYNTHEDIT_EXE
