@@ -27,7 +27,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      - uses: valadaptive/download-file-action@v0.1.0
 
       - name: Download and Cache File
         uses: valadaptive/download-file-action@v0.1.0
