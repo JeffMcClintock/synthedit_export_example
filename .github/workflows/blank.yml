@@ -32,11 +32,7 @@ jobs:
       - name: Download and Cache File
         uses: valadaptive/download-file-action@v0.1.0
         with:
-          # The URL to fetch
           url: http://synthedit.com/beta/Install_SynthEdit_64bit.exe
-          # The path to save the file to. Will be [default directory]/[URL file name] if not provided
-          # destination: # optional
-          # The maximum age of the cached file in seconds. If omitted or the empty string, the file will be cached indefinitely. If set to 0, the file will always be re-downloaded.
           max-age: 86400
     
       # Runs a single command using the runners shell
