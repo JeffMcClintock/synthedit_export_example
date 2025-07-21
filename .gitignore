@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+/installer_win/.vs
+/bootstrapper_win/.vs
